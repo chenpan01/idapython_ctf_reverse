@@ -1,0 +1,8 @@
+def OutDataAndName(SegName,Start,End):
+	data = []
+	for ea in range(Start,End): #遍历段内每个地址
+		data.append(chr(Byte(ea))) #获取字节及字节对应的字符
+	print SegName,len(data)
+ea=ScreenEA()
+for seg_ea in Segments():
+	OutDataAndName(SegName(seg_ea),seg_ea, SegEnd(seg_ea))
