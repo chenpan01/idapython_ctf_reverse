@@ -48,3 +48,4 @@ for seg in Segments():
 	AllData[SegName(seg_ea)]=segdata
 for segName ,data in AllData.items():#输出字段名和每个字段的大小
 	print segName,len(data)
+	
