@@ -1,3 +1,4 @@
+第一种实现方法：
 def OutDataAndName(SegName,Start,End):
 	data = []
 	for ea in range(Start,End): #遍历段内每个地址
@@ -6,3 +7,44 @@ def OutDataAndName(SegName,Start,End):
 ea=ScreenEA()
 for seg_ea in Segments():
 	OutDataAndName(SegName(seg_ea),seg_ea, SegEnd(seg_ea))
+	
+第二种实现方法：使用switch进行选择判断
+#-*- coding:utf-8 -*-
+segdata=[]
+def text():                            
+    return 'text:'+str(len(segdata))
+
+
+def idata():                            
+    return 'idata:'+str(len(segdata))
+
+
+def rdata():                            
+    return 'rdata:'+str(len(segdata))
+
+
+def default():                          
+    return 'data:'+str(len(segdata))
+
+
+switch = {'.text': text,                
+          '.idata': idata,                
+          '.rdata': rdata,               
+          }
+for seg in Segments():
+	segdata=[]
+	for seg_ea in range(SegStart(seg),SegEnd(seg)):#遍历所有字段
+		segdata.append(chr(Byte(seg_ea)))
+	choice = SegName(seg_ea) # 获取选择
+	print switch.get(choice, default)()            # 执行对应的函数，如果没有就执行默认的函数
+	
+	
+第三种方法：使用字典存储段名和段的长度
+AllData=dict()#字典数据类型
+for seg in Segments():
+	segdata=[]
+	for seg_ea in range(SegStart(seg),SegEnd(seg)):#遍历所有字段
+		segdata.append(chr(Byte(seg_ea)))
+	AllData[SegName(seg_ea)]=segdata
+for segName ,data in AllData.items():#输出字段名和每个字段的大小
+	print segName,len(data)
