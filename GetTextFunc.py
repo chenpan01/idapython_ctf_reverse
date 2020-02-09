@@ -38,4 +38,28 @@ def GetFuncAndNum(Start,End):
 for seg in Segments(): #遍历所有的段
     if SegName(seg)=='.text': 
 		GetFuncAndNum(seg,SegEnd(seg))
+		
+第三种方法：
+num=[]
+Func=[]
+def GetFuncAndNum(Start,End):
+	str=''
+	for function_ea in Functions(Start, End):
+		FunctionName=GetFunctionName(function_ea)
+		FunctionName1=FunctionName+'0'#加0，区分每个函数
+		#print str
+		xb=str.find(FunctionName)
+		if xb!=-1:
+			if xb-1>=0 and str[xb-1]!='0':#如果找到的是包含查找函数名的函数，则回到循环
+				continue
+			num[Func.index(FunctionName1)]=num[Func.index(FunctionName1)]+1
+		else:
+			str+=FunctionName1			
+			num.append(1) #初始化
+			Func.append(FunctionName1)
+	for i in range(0,len(num)):
+		print Func[i][0:len(Func[i])-1],":",num[i]
+for seg in Segments(): #遍历所有的段
+    if SegName(seg)=='.text': 
+		GetFuncAndNum(seg,SegEnd(seg))
 
