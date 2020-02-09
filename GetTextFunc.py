@@ -38,5 +38,4 @@ def GetFuncAndNum(Start,End):
 for seg in Segments(): #遍历所有的段
     if SegName(seg)=='.text': 
 		GetFuncAndNum(seg,SegEnd(seg))
-#第三种方法：
 
