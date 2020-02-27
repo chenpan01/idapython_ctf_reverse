@@ -29,7 +29,7 @@ for seg in Segments():
 		#print 'seg ',hex(seg)
 		GetStrPos(seg,SegEnd(seg))
 
-#2.输出使用'invalid argument'字符串附近的跳转指令，分析找出关键指令
+#2.找到使用操作指令的位置，分析找到起到关键作用的操作指令
 import re
 #算术逻辑操作码
 CalOp=['mul','imul','or','not','div','xor']
